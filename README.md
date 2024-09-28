@@ -1,51 +1,60 @@
-Welcome to my personal website! This website serves as a hub for my online presence, showcasing my projects, skills, and sharing blog posts on topics 
-I'm passionate about. Feel free to explore, and don't hesitate to reach out if you'd like to collaborate or connect.
+###### Yuxiang Pan
+## yuxiangpan2019@gmail.com      yuxiang.pan@mail.mcgill.ca(current academic contact)
+
+#### About
+
+I am a U4 undergraduate student at McGill University studying in mathematic and computer science. This website serves as a hub for my online resume, my presence, showcasing my projects and skills. Feel free to explore, and don't hesitate to reach out if you'd like to collaborate or connect.
+
+You can visit my Linkdln profile at: [here](https://www.linkedin.com/in/yuxiang-pan-725b86250/).
 
 ## Table of Contents
-
 - [About](#about)
-- [Features](#features)
-- [Technologies](#technologies)
-- [Setup](#setup)
-- [Usage](#usage)
-- [Folder Structure](#folder-structure)
-- [Customization](#customization)
-- [License](#license)
+- [Education](#education)
+- [Skills](#skills)
+- [Softwares](#software)
+- [Languages](#language)
+- [Work and Service](#work and service)
 
-## About
+#### Education
 
-This website is a showcase of my work, projects, and thoughts. It includes:
+## MCGILL UNIVERSITY      # MONTREAL, QUEBEC, CANADA      Sep 2021 - Dec 2024
+# BACHELOR OF SCIENCE
 
-- A portfolio section where I display my personal and professional projects.
-- A blog where I write about technology, design, and other topics of interest.
-- A contact section for people who want to reach out.
+Math & Computer Science
+Grade: 3.47/4.00
 
-You can visit the live version at: [YourWebsite.com](https://yourwebsite.com).
+#### Skills
 
-## Features
+- Applied Statistic and Data Science: applying statistical methods over real life data. Experience in regression modeling, non-parametric statistic; as well as is using SQL and R to perform data analysis.
+- Artificial Intelligence: Experience in neural network, machine learning algorithm, apply optimization and heuristic, and research experience in natural language processing.
+- Automated Reasoning: using formal method, mathematical modeling and proof assistant to develop efficient and valid verification programs. Elementary research experience in normalization by evaluation for the simply-typed lambda calculus (supervised by [Jason Hu](https://hustmphrrr.github.io/))
+- Applied Mathematic: Experience in applied partial differential equations over physical quantity, and numerical analysis to achieve model-flexible and highly accurate approximation.
 
-- Responsive design, optimized for both desktop and mobile devices
-- Dark and light mode support
-- Integrated blog and portfolio sections
-- SEO optimized with Open Graph metadata
-- Easy-to-edit modular structure
+#### Softwares
 
-## Technologies
+Fluent in:
 
-This website is built with:
+- **Python**: Daily usage. To swiftly implement a sudden algorithm idea. Often used for machine learning application.
+- **Java**: Software design and video game modding.
+- **C**: For low-level high-performance implementation. Building simple shell.
+- **R**: Efficiently compute various statistical model, such as rank-based non-parametric statistic and regression models.
+- **SQL**: Data retrieval and manipulation. Neatly structure and classify data while assuring easy and fast access.
+- **OCaml**: Functional programming, mostly used for research purpose.
+- **Coq/Beluga**: Construct mathematical models of real life systems (such as a software program or a security protocol) and reason about their properties to ensure correctness.
 
-- **HTML5**: Semantic structure for clear and accessible content
-- **CSS3**: For styling with flexbox and grid for layout
-- **JavaScript**: For interactivity and dynamic elements
-- **Bootstrap**: For responsive design components (optional)
-- **Node.js & Express**: (Optional for dynamic features or backend)
-- **Netlify/Vercel**: Deployed for hosting
+#### Languages
 
-## Setup
+- English: fluent
+- French: fluent
+- Chinese Mandarin: native
+- Japanese: anime-level ¯\_(ツ)_/¯
 
-To run this website locally, follow these steps:
+#### Work and Service
 
-### 1. Clone the repository
+## Volunteer
+Royal Victoria Hospital elder care-taker: communicate with hospitalized seniors, listen to their stories, prepare afternoon tea, maintain a good mood in the hospital wings.
+Summer 2019 - Spring 2020
 
-```bash
-git clone https://github.com/yourusername/personal-website.git
+## Life Guard
+World Gym Brossard life guard: maintain safe water quality, keep a clean environment, prevent accident, respond to emmergencies in the entire gym.
+Summer 2020 - Fall 2021

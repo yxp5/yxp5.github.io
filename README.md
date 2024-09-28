@@ -12,7 +12,7 @@ yuxiang.pan@mail.mcgill.ca (current academic contact)
 
 I am a U4 undergraduate student at McGill University studying in mathematic and computer science. This website serves as a hub for my online resume, my presence, showcasing my projects and skills. Feel free to explore, and don't hesitate to reach out if you'd like to collaborate or connect.
 
-You can visit my Linkdln profile at: [here](https://www.linkedin.com/in/yuxiang-pan-725b86250/).
+You can visit my Linkdln profile at: <a href="https://www.linkedin.com/in/yuxiang-pan-725b86250/" target="_blank">here</a>.
 
 # Table of Contents
 - [About](#about)

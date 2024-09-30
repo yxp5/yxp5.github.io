@@ -1,4 +1,4 @@
-body        {background-color: rgb(236, 236, 236); color: rgb(0, 0, 0); font-size: larger;}
+body        {background-color: rgb(236, 236, 236); color: rgb(0, 0, 0); font-size: 1vw;}
 
 a           {text-decoration: none; color: rgb(255, 255, 255);}
 
@@ -10,6 +10,6 @@ a           {text-decoration: none; color: rgb(255, 255, 255);}
 
 .menu       {list-style-type: none; text-align: center; line-height: 3; margin: 0; position: absolute;
             top: 33%; -ms-transform: translateY(-50%); transform: translateY(-50%);
-            word-spacing: 50px; padding-top: 15px;}
+            word-spacing: 2vw; padding-top: 15px;}
 
 li          {margin: 3%;}

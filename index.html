@@ -6,9 +6,1465 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Yuxiang Pan - AI Engineer & Software Developer</title>
     <meta name="description" content="Professional portfolio of Yuxiang Pan - AI Engineer, Software Developer, and Data Scientist specializing in machine learning and enterprise solutions." />
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+        line-height: 1.6;
+        background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0f172a 100%);
+        color: #f8fafc;
+        min-height: 100vh;
+      }
+
+      /* Navigation */
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        backdrop-filter: blur(16px);
+        background: rgba(15, 23, 42, 0.8);
+        border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .brand {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: #f8fafc;
+        cursor: pointer;
+        background: none;
+        border: none;
+        transition: color 0.2s;
+      }
+
+      .brand:hover {
+        color: #93c5fd;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 0.25rem;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .nav-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        font-size: 0.875rem;
+        text-decoration: none;
+        transition: all 0.2s;
+        cursor: pointer;
+        border: none;
+        background: transparent;
+        color: #cbd5e1;
+      }
+
+      .nav-btn:hover {
+        color: #f8fafc;
+        background: rgba(51, 65, 85, 0.5);
+      }
+
+      .nav-btn.active {
+        background: #2563eb;
+        color: white;
+        box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.25);
+      }
+
+      /* Main content */
+      .main {
+        padding-top: 5rem;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+
+      .section {
+        padding: 5rem 0;
+      }
+
+      .section-alt {
+        background: rgba(30, 41, 59, 0.2);
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 4rem;
+      }
+
+      .section-title h2 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #f8fafc;
+        margin-bottom: 1rem;
+      }
+
+      .section-title p {
+        font-size: 1.25rem;
+        color: #94a3b8;
+      }
+
+      /* Grid system */
+      .grid {
+        display: grid;
+        gap: 3rem;
+        grid-template-columns: 1fr;
+      }
+
+      .grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      @media (max-width: 768px) {
+        .grid-2, .grid-3 {
+          grid-template-columns: 1fr;
+        }
+        .nav-links {
+          gap: 0.5rem;
+        }
+        .nav-container {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 1rem;
+        }
+        .nav-links {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 0.5rem;
+          width: 100%;
+        }
+        .nav-btn {
+          padding: 0.75rem 1rem;
+          font-size: 0.875rem;
+          text-align: center;
+          justify-content: center;
+        }
+        .brand {
+          text-align: center;
+          margin-bottom: 0.5rem;
+        }
+      }
+
+      /* Cards */
+      .card {
+        background: rgba(30, 41, 59, 0.3);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        border-radius: 1rem;
+        padding: 2rem;
+        transition: all 0.3s;
+      }
+
+      .card:hover {
+        border-color: rgba(148, 163, 184, 0.3);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      }
+
+      .card h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #f8fafc;
+        margin-bottom: 1rem;
+      }
+
+      .card h4 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #f8fafc;
+        margin-bottom: 1rem;
+      }
+
+      .card p {
+        color: #cbd5e1;
+        margin-bottom: 1rem;
+        line-height: 1.7;
+      }
+
+      /* Hero section */
+      .hero {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: center;
+      }
+
+      @media (max-width: 1024px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .hero-title {
+        font-size: 3rem;
+        font-weight: 800;
+        color: #f8fafc;
+        margin-bottom: 1.5rem;
+        line-height: 1.2;
+      }
+
+      .hero-gradient {
+        background: linear-gradient(to right, #60a5fa, #34d399);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero-subtitle {
+        font-size: 1.25rem;
+        color: #cbd5e1;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+      }
+
+      .hero-description {
+        font-size: 1.125rem;
+        color: #94a3b8;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+      }
+
+      /* Buttons */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.2s;
+        cursor: pointer;
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        background: rgba(30, 41, 59, 0.5);
+        color: #cbd5e1;
+      }
+
+      .btn:hover {
+        background: rgba(51, 65, 85, 0.5);
+        color: #f8fafc;
+      }
+
+      .btn-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      /* Contact info */
+      .contact-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .contact-icon {
+        margin-top: 0.25rem;
+      }
+
+      /* Certificate section */
+      .certificate {
+        background: rgba(30, 41, 59, 0.3);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        margin-top: 2rem;
+      }
+
+      .certificate h3 {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #f8fafc;
+        margin-bottom: 1rem;
+      }
+
+      /* Work experience */
+      .job {
+        background: rgba(30, 41, 59, 0.3);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        border-radius: 1rem;
+        padding: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .job-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .job-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #f8fafc;
+        margin-bottom: 0.5rem;
+      }
+
+      .job-company {
+        font-size: 1.125rem;
+        color: #60a5fa;
+      }
+
+      .job-link {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #34d399;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .job-link:hover {
+        color: #6ee7b7;
+      }
+
+      .job-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+
+      @media (max-width: 768px) {
+        .job-content {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .job-section h4 {
+        font-size: 1.125rem;
+        font-weight: 500;
+        color: #f8fafc;
+        margin-bottom: 0.75rem;
+      }
+
+      .job-list {
+        list-style: none;
+      }
+
+      .job-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        color: #cbd5e1;
+        margin-bottom: 0.5rem;
+      }
+
+      .job-bullet {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        margin-top: 0.5rem;
+        flex-shrink: 0;
+      }
+
+      .job-bullet.responsibility {
+        background: #60a5fa;
+      }
+
+      .job-bullet.achievement {
+        background: #34d399;
+      }
+
+      /* Skills */
+      .skill-card {
+        background: rgba(30, 41, 59, 0.3);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        text-align: center;
+      }
+
+      .skill-title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #f8fafc;
+        margin-bottom: 0.5rem;
+      }
+
+      .skill-badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        border: 1px solid;
+      }
+
+      .skill-badge.blue {
+        background: rgba(59, 130, 246, 0.2);
+        color: #60a5fa;
+        border-color: rgba(59, 130, 246, 0.3);
+      }
+
+      .skill-badge.emerald {
+        background: rgba(16, 185, 129, 0.2);
+        color: #34d399;
+        border-color: rgba(16, 185, 129, 0.3);
+      }
+
+      .skill-badge.purple {
+        background: rgba(147, 51, 234, 0.2);
+        color: #a78bfa;
+        border-color: rgba(147, 51, 234, 0.3);
+      }
+
+      .skill-badge.orange {
+        background: rgba(245, 158, 11, 0.2);
+        color: #fbbf24;
+        border-color: rgba(245, 158, 11, 0.3);
+      }
+
+      .skill-badge.red {
+        background: rgba(239, 68, 68, 0.2);
+        color: #f87171;
+        border-color: rgba(239, 68, 68, 0.3);
+      }
+
+      /* Research papers */
+      .paper {
+        background: rgba(30, 41, 59, 0.3);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        border-radius: 1rem;
+        padding: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .paper-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #f8fafc;
+        margin-bottom: 1rem;
+      }
+
+      .paper-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin: 1rem 0;
+      }
+
+      .paper-link {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #60a5fa;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .paper-link:hover {
+        color: #93c5fd;
+      }
+
+      .paper-link.download {
+        color: #34d399;
+      }
+
+      .paper-link.download:hover {
+        color: #6ee7b7;
+      }
+
+      .paper-authors {
+        color: #94a3b8;
+        font-size: 0.875rem;
+      }
+
+      .paper-authors a {
+        color: #60a5fa;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .paper-authors a:hover {
+        color: #93c5fd;
+      }
+
+      /* Technology grid */
+      .tech-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .tech-card {
+        background: rgba(30, 41, 59, 0.3);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+      }
+
+      .tech-title {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #f8fafc;
+        margin-bottom: 0.75rem;
+      }
+
+      /* Languages */
+      .lang-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .lang-card {
+        background: rgba(30, 41, 59, 0.3);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        text-align: center;
+      }
+
+      .lang-icon {
+        margin: 0 auto 0.75rem;
+        color: #60a5fa;
+      }
+
+      .lang-name {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #f8fafc;
+        margin-bottom: 0.5rem;
+      }
+
+      .lang-level {
+        color: #94a3b8;
+      }
+
+      /* Education */
+      .education {
+        background: rgba(30, 41, 59, 0.3);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        border-radius: 1rem;
+        padding: 2rem;
+      }
+
+      .education-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .education-icon {
+        color: #60a5fa;
+      }
+
+      .education-info h3 {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: #f8fafc;
+        margin: 0;
+      }
+
+      .education-info p {
+        color: #94a3b8;
+        margin: 0;
+      }
+
+      .education-degree {
+        border-left: 4px solid #60a5fa;
+        padding-left: 1.5rem;
+      }
+
+      .education-degree h4 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #f8fafc;
+        margin-bottom: 0.5rem;
+      }
+
+      .education-degree p {
+        font-size: 1.125rem;
+        color: #60a5fa;
+        margin: 0;
+      }
+
+      /* Footer */
+      .footer {
+        background: rgba(15, 23, 42, 0.5);
+        border-top: 1px solid rgba(148, 163, 184, 0.2);
+        padding: 3rem 0;
+        text-align: center;
+      }
+
+      .footer p {
+        color: #94a3b8;
+        margin-bottom: 1rem;
+      }
+
+      .footer .copyright {
+        color: #64748b;
+        font-size: 0.875rem;
+        margin: 0;
+      }
+
+      /* Additional roles grid */
+      .roles-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .role-card {
+        background: rgba(30, 41, 59, 0.2);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+      }
+
+      .role-title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #f8fafc;
+        margin-bottom: 0.5rem;
+      }
+
+      .role-company {
+        color: #94a3b8;
+      }
+
+      /* Projects list */
+      .projects-list {
+        background: rgba(30, 41, 59, 0.3);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        border-radius: 1rem;
+        padding: 2rem;
+      }
+
+      .projects-list ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .projects-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        color: #cbd5e1;
+        margin-bottom: 1rem;
+      }
+
+      .projects-list li:last-child {
+        margin-bottom: 0;
+      }
+
+      .project-bullet {
+        width: 0.375rem;
+        height: 0.375rem;
+        border-radius: 50%;
+        margin-top: 0.5rem;
+        flex-shrink: 0;
+        background: #60a5fa;
+      }
+
+      .project-bullet.sub {
+        background: #64748b;
+        width: 0.25rem;
+        height: 0.25rem;
+      }
+
+      .projects-list .sub-list {
+        margin-top: 1rem;
+        margin-left: 2rem;
+      }
+
+      .projects-list .sub-list li {
+        color: #94a3b8;
+        margin-bottom: 0.75rem;
+      }
+
+      .github-link {
+        color: #60a5fa;
+        text-decoration: none;
+        transition: color 0.2s;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+
+      .github-link:hover {
+        color: #93c5fd;
+      }
+
+      /* Utility classes */
+      .hidden {
+        display: none;
+      }
+
+      .icon {
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+
+      .icon-sm {
+        width: 1rem;
+        height: 1rem;
+      }
+
+      .icon-lg {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+
+      .icon-xl {
+        width: 2rem;
+        height: 2rem;
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <div id="root">
+      <!-- Navigation -->
+      <nav class="nav">
+        <div class="nav-container">
+          <button class="brand" onclick="scrollToSection('about')">
+            Yuxiang Pan
+          </button>
+          <div class="nav-links">
+            <button class="nav-btn" data-section="about">
+              <i data-lucide="user" class="icon-sm"></i>
+              <span>About</span>
+            </button>
+            <button class="nav-btn" data-section="work_and_service">
+              <i data-lucide="briefcase" class="icon-sm"></i>
+              <span>Experience</span>
+            </button>
+            <button class="nav-btn" data-section="skills">
+              <i data-lucide="award" class="icon-sm"></i>
+              <span>Skills</span>
+            </button>
+            <button class="nav-btn" data-section="research_and_project">
+              <i data-lucide="code" class="icon-sm"></i>
+              <span>Research</span>
+            </button>
+            <button class="nav-btn" data-section="technology">
+              <i data-lucide="code" class="icon-sm"></i>
+              <span>Technology</span>
+            </button>
+            <button class="nav-btn" data-section="languages">
+              <i data-lucide="globe" class="icon-sm"></i>
+              <span>Languages</span>
+            </button>
+            <button class="nav-btn" data-section="education">
+              <i data-lucide="graduation-cap" class="icon-sm"></i>
+              <span>Education</span>
+            </button>
+            <a href="test.html" class="nav-btn">
+              <span>Playground</span>
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Main Content -->
+      <main class="main">
+        <!-- About Section -->
+        <section id="about" class="section">
+          <div class="container">
+            <div class="hero">
+              <div>
+                <h2 class="hero-title">
+                  Software Developer &<br />
+                  <span class="hero-gradient">AI Engineer</span>
+                </h2>
+                <p class="hero-subtitle">
+                  I am passionate about software development and AI engineering. I help companies to enhance their business with AI.
+                </p>
+                <p class="hero-description">
+                  This website serves as a hub for my presence, showcasing my projects and skills. Feel free to explore, and don't hesitate to reach out using my AI assistant (on the right bottom corner) if you'd like to collaborate or connect.
+                </p>
+                
+                <div class="btn-group">
+                  <a href="https://www.linkedin.com/in/yuxiang-pan-725b86250/" target="_blank" rel="noopener noreferrer" class="btn">
+                    <i data-lucide="linkedin" class="icon"></i>
+                    <span>LinkedIn</span>
+                  </a>
+                  <a href="https://github.com/yxp5" target="_blank" rel="noopener noreferrer" class="btn">
+                    <i data-lucide="github" class="icon"></i>
+                    <span>GitHub</span>
+                  </a>
+                </div>
+
+                <div class="certificate">
+                  <h3>
+                    <i data-lucide="award" class="icon"></i>
+                    Certificate
+                  </h3>
+                  <p>
+                    I am a certified Associate Data Analyst by 
+                    <a href="https://www.datacamp.com/" target="_blank" rel="noopener noreferrer" style="color: #60a5fa; text-decoration: none;">
+                      DataCamp
+                    </a>.
+                  </p>
+                  <p style="color: #94a3b8;">
+                    My 
+                    <a href="data-cert.pdf" download style="color: #60a5fa; text-decoration: none; display: inline-flex; align-items: center; gap: 0.25rem;">
+                      certificate <i data-lucide="download" class="icon-sm"></i>
+                    </a> 
+                    is valid from Nov 2024 to Nov 2026.
+                  </p>
+                </div>
+              </div>
+
+              <div class="card">
+                <h3>Contact Information</h3>
+                <div class="contact-item">
+                  <i data-lucide="mail" class="contact-icon icon" style="color: #60a5fa;"></i>
+                  <div>
+                    <p style="color: #f8fafc; font-weight: 500; margin-bottom: 0.25rem;">Email</p>
+                    <p style="color: #cbd5e1; margin-bottom: 0.25rem;">yuxiangpan2019@gmail.com</p>
+                    <p style="color: #94a3b8; font-size: 0.875rem; margin: 0;">yuxiang.pan@mail.mcgill.ca (academic)</p>
+                  </div>
+                </div>
+                <div class="contact-item">
+                  <i data-lucide="phone" class="contact-icon icon" style="color: #34d399;"></i>
+                  <div>
+                    <p style="color: #f8fafc; font-weight: 500; margin-bottom: 0.25rem;">Mobile</p>
+                    <p style="color: #cbd5e1; margin: 0;">(+1) 514-993-0881 (Canada)</p>
+                  </div>
+                </div>
+                <div class="contact-item">
+                  <i data-lucide="map-pin" class="contact-icon icon" style="color: #f87171;"></i>
+                  <div>
+                    <p style="color: #f8fafc; font-weight: 500; margin-bottom: 0.25rem;">Location</p>
+                    <p style="color: #cbd5e1; margin: 0;">Montreal, Quebec, Canada</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Work and Service Section -->
+        <section id="work_and_service" class="section section-alt">
+          <div class="container">
+            <div class="section-title">
+              <h2>Work and Service</h2>
+              <p>Professional experience and contributions</p>
+            </div>
+
+            <div>
+              <div class="job">
+                <div class="job-header">
+                  <div>
+                    <h3 class="job-title">AI Engineer</h3>
+                    <p class="job-company">Smart Automation</p>
+                  </div>
+                  <a href="https://smartautomation.art/" target="_blank" rel="noopener noreferrer" class="job-link">
+                    <span>Agency Website</span>
+                    <i data-lucide="external-link" class="icon-sm"></i>
+                  </a>
+                </div>
+                
+                <div class="job-content">
+                  <div class="job-section">
+                    <h4>Responsibilities:</h4>
+                    <ul class="job-list">
+                      <li>
+                        <span class="job-bullet responsibility"></span>
+                        Meet with prospects and design an optimal solution tailored for prospect's business requirements.
+                      </li>
+                      <li>
+                        <span class="job-bullet responsibility"></span>
+                        Deploy AI solutions, design systems, and set up APIs
+                      </li>
+                      <li>
+                        <span class="job-bullet responsibility"></span>
+                        Be versatile, deliver on time, build trustworthy and reliable solutions
+                      </li>
+                      <li>
+                        <span class="job-bullet responsibility"></span>
+                        Retainer maintenance.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="job">
+                <div class="job-header">
+                  <div>
+                    <h3 class="job-title">Software Engineer</h3>
+                    <p class="job-company">Robert Bosch - UAES</p>
+                  </div>
+                </div>
+                
+                <div class="job-content">
+                  <div class="job-section">
+                    <h4>Responsibilities:</h4>
+                    <ul class="job-list">
+                      <li>
+                        <span class="job-bullet responsibility"></span>
+                        Lead cross-functional team in the developing enterprise-level software with extendable AI system using Agile and Scrum methodologies.
+                      </li>
+                      <li>
+                        <span class="job-bullet responsibility"></span>
+                        Construct flexible and scalable database for confidential data, with maintenance protocol and action plan to mitigate risks in future development.
+                      </li>
+                      <li>
+                        <span class="job-bullet responsibility"></span>
+                        Develop the software layer: conduct data analysis using Panda and Numpy framework, implement core logics and algorithms, build machine learning model tailored for company data using PyTorch, Tensorflow, and Scikit Learn, develop software's frontend.
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <div class="job-section">
+                    <h4>Achievements:</h4>
+                    <ul class="job-list">
+                      <li>
+                        <span class="job-bullet achievement"></span>
+                        Implement process automation, reducing manual workload by 60-90%.
+                      </li>
+                      <li>
+                        <span class="job-bullet achievement"></span>
+                        Add resource recycling to the pipeline, introducing standards.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="job">
+                <div class="job-header">
+                  <div>
+                    <h3 class="job-title">Programming Language Researcher</h3>
+                    <p class="job-company">McGill University</p>
+                  </div>
+                </div>
+                
+                <div class="job-content">
+                  <div class="job-section">
+                    <h4>Responsibilities:</h4>
+                    <ul class="job-list">
+                      <li>
+                        <span class="job-bullet responsibility"></span>
+                        Design logic frameworks to replicate real life models (software, hardware, systems, and more!) using functional programming languages.
+                      </li>
+                      <li>
+                        <span class="job-bullet responsibility"></span>
+                        Mechanize normalization by evaluation to enhance model reasoning, reducing model verification speed from days to seconds.
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <div class="job-section">
+                    <h4>Achievements:</h4>
+                    <ul class="job-list">
+                      <li>
+                        <span class="job-bullet achievement"></span>
+                        The frameworks are applicable to various industrial settings.
+                      </li>
+                      <li>
+                        <span class="job-bullet achievement"></span>
+                        Automate up to 100% of verification process in the pipeline.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="job">
+                <div class="job-header">
+                  <div>
+                    <h3 class="job-title">Natural Language Processing Researcher</h3>
+                    <p class="job-company">McGill University</p>
+                  </div>
+                </div>
+                
+                <div class="job-content">
+                  <div class="job-section">
+                    <h4>Responsibilities:</h4>
+                    <ul class="job-list">
+                      <li>
+                        <span class="job-bullet responsibility"></span>
+                        Research state-of-the-art (2023) natural language processing models for the classification of Chinese characters.
+                      </li>
+                      <li>
+                        <span class="job-bullet responsibility"></span>
+                        Implement and optimize classification machine learning models without high-order semantic logics.
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <div class="job-section">
+                    <h4>Achievements:</h4>
+                    <ul class="job-list">
+                      <li>
+                        <span class="job-bullet achievement"></span>
+                        Reach +90% model accuracy.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="job">
+                <div class="job-header">
+                  <div>
+                    <h3 class="job-title">Software Engineer</h3>
+                    <p class="job-company">Anban Tech</p>
+                  </div>
+                </div>
+                
+                <div class="job-content">
+                  <div class="job-section">
+                    <h4>Responsibilities:</h4>
+                    <ul class="job-list">
+                      <li>
+                        <span class="job-bullet responsibility"></span>
+                        Debug and improve the intelligent fuzziness testing system.
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <div class="job-section">
+                    <h4>Achievements:</h4>
+                    <ul class="job-list">
+                      <li>
+                        <span class="job-bullet achievement"></span>
+                        Clean noise from data depending on the noise intensity.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Additional roles -->
+              <div class="roles-grid">
+                <div class="role-card">
+                  <h3 class="role-title">Volunteer</h3>
+                  <p class="role-company">Elderly care-taker at Royal Victoria Hospital</p>
+                </div>
+                <div class="role-card">
+                  <h3 class="role-title">Life Guard</h3>
+                  <p class="role-company">Guardian at World Gym Brossard</p>
+                </div>
+                <div class="role-card">
+                  <h3 class="role-title">Asgardian Knight Commander</h3>
+                  <p class="role-company">Protector of seven galaxies :)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section">
+          <div class="container">
+            <div class="section-title">
+              <h2>Skills</h2>
+              <p>Core competencies and expertise</p>
+            </div>
+
+            <div class="grid grid-3">
+              <div class="skill-card">
+                <h3 class="skill-title">Full-Stack Software Development</h3>
+                <span class="skill-badge blue">2.5 years</span>
+              </div>
+              <div class="skill-card">
+                <h3 class="skill-title">AI Engineering</h3>
+                <span class="skill-badge emerald">2 years</span>
+              </div>
+              <div class="skill-card">
+                <h3 class="skill-title">Data Scientist</h3>
+                <span class="skill-badge purple">3 years</span>
+              </div>
+              <div class="skill-card">
+                <h3 class="skill-title">Build Machine Learning Models</h3>
+                <span class="skill-badge orange">2 years</span>
+              </div>
+              <div class="skill-card">
+                <h3 class="skill-title">Logic and Reasoning Researcher</h3>
+                <span class="skill-badge red">1.5 years</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Research and Projects Section -->
+        <section id="research_and_project" class="section section-alt">
+          <div class="container">
+            <div class="section-title">
+              <h2>Research and Projects</h2>
+              <p>Academic research and technical projects</p>
+            </div>
+
+            <!-- Research -->
+            <div style="margin-bottom: 4rem;">
+              <h3 style="font-size: 1.5rem; font-weight: 600; color: #f8fafc; margin-bottom: 2rem;">Research</h3>
+              
+              <div class="paper">
+                <h4 class="paper-title">
+                  Normalization by Evaluation for Simply Typed Lambda Calculus (2024)
+                </h4>
+                <p style="color: #cbd5e1; margin-bottom: 1.5rem; line-height: 1.7;">
+                  Normalization by Evaluation (NbE) is a powerful normalization concept in type theory and functional programming that aims to establish a consistent normal
+                  form of representing typable expression. The technique is useful to construct efficient and extendable verifier which can reason about model properties.
+                </p>
+                <p style="color: #cbd5e1; margin-bottom: 1.5rem;">
+                  This research presents an overview of NbE acting on the model of Simply Typed Lambda Calculus in proof assistant Coq.
+                </p>
+                <div class="paper-links">
+                  <a href="https://gitlab.cs.mcgill.ca/yuxiang.pan/comp-396-project" target="_blank" rel="noopener noreferrer" class="paper-link">
+                    <span>Repository</span>
+                    <i data-lucide="external-link" class="icon-sm"></i>
+                  </a>
+                  <a href="nbe-stlc.pdf" download class="paper-link download">
+                    <span>Download Paper</span>
+                    <i data-lucide="download" class="icon-sm"></i>
+                  </a>
+                </div>
+                <p class="paper-authors">
+                  Amazing supervisors: 
+                  <a href="https://hustmphrrr.github.io/" target="_blank" rel="noopener noreferrer">
+                    Jason Hu, PhD.
+                  </a>, 
+                  <a href="https://www.cs.mcgill.ca/~bpientka/" target="_blank" rel="noopener noreferrer">
+                    Prof. Brigitte Pientka
+                  </a>
+                </p>
+              </div>
+
+              <div class="paper">
+                <h4 class="paper-title">
+                  A Deeper Exploration of Natural Language Processing in Chinese (2023)
+                </h4>
+                <p style="color: #cbd5e1; margin-bottom: 1.5rem; line-height: 1.7;">
+                  We present a Natural Language Processing (NLP) task of text classification for text in Chinese, with a deeper focus on radical and stroke information for
+                  individual Chinese character. We utilize multinomial naive bayes classifiers with different selection strategies. Our work proves the effectiveness of the technique, 
+                  as it outperforms expected accuracy while completely disregards textual semantic logic.
+                </p>
+                <div class="paper-links">
+                  <a href="nlp-chinese.pdf" download class="paper-link download">
+                    <span>Download Paper</span>
+                    <i data-lucide="download" class="icon-sm"></i>
+                  </a>
+                </div>
+                <p class="paper-authors">
+                  Amazing teammates: 
+                  <a href="https://github.com/milk-girl">Ava Gilmour</a>, Haiqi Zhou
+                </p>
+              </div>
+            </div>
+
+            <!-- Projects -->
+            <div>
+              <h3 style="font-size: 1.5rem; font-weight: 600; color: #f8fafc; margin-bottom: 2rem;">Projects</h3>
+              <div class="projects-list">
+                <ul>
+                  <li>
+                    <span class="project-bullet"></span>
+                    Multiple ML competition experience that scored within top 25% globally, with best ML models ranked 12/993 and 82/4770.
+                  </li>
+                  <li>
+                    <span class="project-bullet"></span>
+                    Multiple independent projects on 
+                    <a href="https://github.com/yxp5" target="_blank" rel="noopener noreferrer" class="github-link">
+                      GitHub<i data-lucide="external-link" class="icon-sm"></i>
+                    </a>:
+                  </li>
+                </ul>
+                <ul class="sub-list">
+                  <li>
+                    <span class="project-bullet sub"></span>
+                    ML model that can detects hand gesture and translate into simple commonly used phrase or English alphabet using American Sign Language.
+                  </li>
+                  <li>
+                    <span class="project-bullet sub"></span>
+                    Cryptographic cipher and attack design.
+                  </li>
+                  <li>
+                    <span class="project-bullet sub"></span>
+                    Mechanizing simple shell in C utilizing different memory management methods.
+                  </li>
+                  <li>
+                    <span class="project-bullet sub"></span>
+                    Exploration of software development principles and design patterns.
+                  </li>
+                  <li>
+                    <span class="project-bullet sub"></span>
+                    Simple video game design and modding.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Technology Section -->
+        <section id="technology" class="section">
+          <div class="container">
+            <div class="section-title">
+              <h2>Technology</h2>
+              <p>Technical proficiencies and tools</p>
+            </div>
+
+            <div class="tech-grid">
+              <div class="tech-card">
+                <h3 class="tech-title">
+                  <i data-lucide="code" class="icon"></i>
+                  AI Tools
+                </h3>
+                <p>Relevance AI, Make, Agentive, Voiceflow, HuggingFace, Google VertexAI, Kaggle Database</p>
+              </div>
+              <div class="tech-card">
+                <h3 class="tech-title">
+                  <i data-lucide="code" class="icon"></i>
+                  Microsoft
+                </h3>
+                <p>Azure, Excel, Power BI, PowerPoint, Word</p>
+              </div>
+              <div class="tech-card">
+                <h3 class="tech-title">
+                  <i data-lucide="code" class="icon"></i>
+                  Python
+                </h3>
+                <p>Daily usage. To implement Machine Learning Model or to build an AI system</p>
+              </div>
+              <div class="tech-card">
+                <h3 class="tech-title">
+                  <i data-lucide="code" class="icon"></i>
+                  Java
+                </h3>
+                <p>Software design and video game modding</p>
+              </div>
+              <div class="tech-card">
+                <h3 class="tech-title">
+                  <i data-lucide="code" class="icon"></i>
+                  C
+                </h3>
+                <p>For low-level high-performance implementation. Building simple shell</p>
+              </div>
+              <div class="tech-card">
+                <h3 class="tech-title">
+                  <i data-lucide="code" class="icon"></i>
+                  R
+                </h3>
+                <p>Efficiently compute various statistical model, such as rank-based non-parametric statistic and regression models</p>
+              </div>
+              <div class="tech-card">
+                <h3 class="tech-title">
+                  <i data-lucide="code" class="icon"></i>
+                  SQL
+                </h3>
+                <p>Data retrieval and manipulation. Neatly structure and classify data while assuring easy and fast access</p>
+              </div>
+              <div class="tech-card">
+                <h3 class="tech-title">
+                  <i data-lucide="code" class="icon"></i>
+                  OCaml
+                </h3>
+                <p>Functional programming, mostly used for research purpose</p>
+              </div>
+              <div class="tech-card">
+                <h3 class="tech-title">
+                  <i data-lucide="code" class="icon"></i>
+                  Coq/Beluga
+                </h3>
+                <p>Construct mathematical models of real life systems (such as software program or security protocol) and reason about their properties to ensure correctness</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Languages Section -->
+        <section id="languages" class="section section-alt">
+          <div class="container">
+            <div class="section-title">
+              <h2>Languages</h2>
+              <p>Multilingual communication abilities</p>
+            </div>
+
+            <div class="lang-grid">
+              <div class="lang-card">
+                <i data-lucide="globe" class="lang-icon icon-lg"></i>
+                <h3 class="lang-name">English</h3>
+                <p class="lang-level">Fluent</p>
+              </div>
+              <div class="lang-card">
+                <i data-lucide="globe" class="lang-icon icon-lg"></i>
+                <h3 class="lang-name">French</h3>
+                <p class="lang-level">Fluent</p>
+              </div>
+              <div class="lang-card">
+                <i data-lucide="globe" class="lang-icon icon-lg"></i>
+                <h3 class="lang-name">Chinese Mandarin</h3>
+                <p class="lang-level">Native</p>
+              </div>
+              <div class="lang-card">
+                <i data-lucide="globe" class="lang-icon icon-lg"></i>
+                <h3 class="lang-name">German</h3>
+                <p class="lang-level">Half-work proficiency</p>
+              </div>
+              <div class="lang-card">
+                <i data-lucide="globe" class="lang-icon icon-lg"></i>
+                <h3 class="lang-name">Japanese</h3>
+                <p class="lang-level">Half-work proficiency</p>
+              </div>
+              <div class="lang-card">
+                <i data-lucide="globe" class="lang-icon icon-lg"></i>
+                <h3 class="lang-name">Spanish</h3>
+                <p class="lang-level">Beginner</p>
+              </div>
+              <div class="lang-card">
+                <i data-lucide="globe" class="lang-icon icon-lg"></i>
+                <h3 class="lang-name">Russian</h3>
+                <p class="lang-level">Beginner</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="section">
+          <div class="container">
+            <div class="section-title">
+              <h2>Education</h2>
+              <p>Academic background and qualifications</p>
+            </div>
+
+            <div class="education">
+              <div class="education-header">
+                <i data-lucide="graduation-cap" class="education-icon icon-xl"></i>
+                <div class="education-info">
+                  <h3>McGill University</h3>
+                  <p>Montreal, Quebec, Canada</p>
+                </div>
+              </div>
+              <div class="education-degree">
+                <h4>Bachelor of Science</h4>
+                <p>Math & Computer Science</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="container">
+          <p>
+            Thank you for visiting my portfolio. Feel free to reach out for collaboration opportunities.
+          </p>
+          <p class="copyright">
+            © 2025 Yuxiang Pan. All rights reserved.
+          </p>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      // Initialize Lucide icons
+      lucide.createIcons();
+
+      // Voiceflow chat widget initialization
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.onload = () => {
+        if (window.voiceflow) {
+          window.voiceflow.chat.load({
+            verify: { projectID: '685431ca3cb4c74c7aee6200' },
+            url: 'https://general-runtime.voiceflow.com',
+            versionID: 'production',
+            voice: {
+              url: "https://runtime-api.voiceflow.com"
+            }
+          });
+        }
+      };
+      script.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs";
+      document.head.appendChild(script);
+
+      // Navigation functionality
+      let activeSection = 'about';
+
+      function scrollToSection(sectionId) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+
+      function updateActiveSection(sectionId) {
+        // Remove active class from all nav buttons
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+          btn.classList.remove('active');
+        });
+        
+        // Add active class to current section button
+        const activeBtn = document.querySelector(`[data-section="${sectionId}"]`);
+        if (activeBtn) {
+          activeBtn.classList.add('active');
+        }
+        
+        activeSection = sectionId;
+      }
+
+      // Add click listeners to navigation buttons
+      document.querySelectorAll('[data-section]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const sectionId = btn.getAttribute('data-section');
+          scrollToSection(sectionId);
+          updateActiveSection(sectionId);
+        });
+      });
+
+      // Intersection Observer for active section tracking
+      const sections = document.querySelectorAll('section[id]');
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              updateActiveSection(entry.target.id);
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+
+      sections.forEach((section) => observer.observe(section));
+
+      // Initialize first active section
+      updateActiveSection('about');
+    </script>
   </body>
 </html>

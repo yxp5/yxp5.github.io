@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yux Website Playground</title>
+  <meta name="description" content="A minimal single-file website to test UI elements, forms, tables, and simple API calls." />
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #121a33;
+      --text: #e8ecf8;
+      --muted: #a8b0c7;
+      --brand: #5b8cff;
+      --brand-2: #7bf1d6;
+      --ok: #30d158;
+      --warn: #ffd60a;
+      --err: #ff453a;
+      --ring: rgba(91, 140, 255, .35);
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f7f9ff;
+        --panel: #ffffff;
+        --text: #101323;
+        --muted: #4a536b;
+        --brand: #2456ff;
+        --brand-2: #00b894;
+        --ring: rgba(36, 86, 255, .25);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 800px at 10% -10%, rgba(123,241,214,.15), transparent),
+                  radial-gradient(1000px 800px at 110% -20%, rgba(91,140,255,.12), transparent),
+                  var(--bg);
+      color: var(--text);
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+
+    header {
+      position: sticky; top: 0; z-index: 10;
+      backdrop-filter: saturate(1.2) blur(8px);
+      background: color-mix(in oklab, var(--bg) 75%, transparent);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav {
+      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+      padding: 16px 24px; max-width: 1100px; margin: 0 auto;
+    }
+    .brand { font-weight: 800; letter-spacing: .3px; }
+    .badge { font-size: 12px; padding: 4px 8px; border-radius: 999px; background: var(--panel); color: var(--muted); border: 1px solid rgba(255,255,255,.06); }
+    .spacer { flex: 1; }
+    .btn {
+      appearance: none; border: 1px solid rgba(255,255,255,.12); background: var(--panel); color: var(--text);
+      padding: 10px 14px; border-radius: 12px; cursor: pointer; font-weight: 600; transition: transform .06s ease, box-shadow .2s ease, border-color .2s ease;
+      box-shadow: 0 2px 0 rgba(0,0,0,.2);
+    }
+    .btn:hover { border-color: var(--brand); box-shadow: 0 6px 20px -6px var(--ring); }
+    .btn:active { transform: translateY(1px); }
+    .btn.primary { background: linear-gradient(180deg, color-mix(in oklab, var(--brand) 85%, transparent), color-mix(in oklab, var(--brand) 60%, black)); border-color: color-mix(in oklab, var(--brand) 70%, black); }
+    .btn.ghost { background: transparent; border-color: rgba(255,255,255,.14); }
+
+    .grid { display: grid; gap: 16px; grid-template-columns: repeat(12, 1fr); }
+    .card { grid-column: span 12; background: color-mix(in oklab, var(--panel) 92%, transparent); border: 1px solid rgba(255,255,255,.06); border-radius: 18px; overflow: hidden; }
+    .card > .hd { display:flex; align-items:center; gap:10px; padding:14px 16px; border-bottom:1px dashed rgba(255,255,255,.1); background: linear-gradient(180deg, rgba(255,255,255,.03), transparent); }
+    .card > .bd { padding: 16px; }
+    .card h2 { margin: 0; font-size: 18px; }
+    .sub { color: var(--muted); font-size: 13px; }
+
+    @media (min-width: 720px) {
+      .span-6 { grid-column: span 6; }
+      .span-4 { grid-column: span 4; }
+      .span-8 { grid-column: span 8; }
+    }
+
+    input, select, textarea { width: 100%; padding: 10px 12px; border-radius: 12px; background: var(--bg); color: var(--text); border: 1px solid rgba(255,255,255,.12); outline: none; }
+    input:focus, select:focus, textarea:focus { border-color: var(--brand); box-shadow: 0 0 0 6px var(--ring); }
+    label { font-weight: 600; font-size: 13px; color: var(--muted); display:block; margin-bottom: 6px; }
+    .row { display: grid; gap: 12px; grid-template-columns: repeat(12, 1fr); }
+    .col-6 { grid-column: span 12; }
+    @media (min-width:720px){ .col-6 { grid-column: span 6; } }
+
+    table { width: 100%; border-collapse: collapse; border-radius: 12px; overflow: hidden; }
+    th, td { padding: 10px 12px; border-bottom: 1px dashed rgba(255,255,255,.1); text-align: left; font-size: 14px; }
+    th { color: var(--muted); font-weight: 700; }
+    tr:hover td { background: rgba(255,255,255,.03); }
+
+    .pill { display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.12); }
+    .pill.ok { border-color: color-mix(in oklab, var(--ok) 60%, transparent); }
+    .pill.warn { border-color: color-mix(in oklab, var(--warn) 60%, transparent); }
+    .pill.err { border-color: color-mix(in oklab, var(--err) 60%, transparent); }
+
+    .footer { color: var(--muted); font-size: 13px; padding: 24px 0 40px; text-align: center; }
+    .kbd { font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace; border:1px solid rgba(255,255,255,.15); padding:2px 6px; border-radius:6px; background:rgba(0,0,0,.2); }
+
+    .toast { position: fixed; right: 16px; bottom: 16px; background: var(--panel); border:1px solid rgba(255,255,255,.12); border-radius: 12px; padding: 12px 14px; display:none; }
+    .toast.show { display:block; animation: pop .18s ease-out; }
+    @keyframes pop { from { transform: translateY(8px); opacity:.0; } to { transform: translateY(0); opacity:1; } }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="nav" aria-label="Main">
+      <div class="brand">🧪 Simple Testing Site</div>
+      <span class="badge">single-file</span>
+      <div class="spacer"></div>
+      <button class="btn ghost" id="toggleTheme" title="Toggle theme (T)">Toggle Theme</button>
+      <a href="#forms" class="btn">Forms</a>
+      <a href="#table" class="btn">Table</a>
+      <a href="#network" class="btn">Network</a>
+      <a href="index.html" class="btn">back to mainpage</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="grid" aria-label="Overview">
+      <div class="card span-8">
+        <div class="hd">
+          <h2>Playground</h2>
+          <span class="sub">Buttons, events, and outputs</span>
+        </div>
+        <div class="bd">
+          <div class="row" style="align-items:end; margin-bottom: 12px;">
+            <div class="col-6">
+              <label for="txt">Text input</label>
+              <input id="txt" placeholder="Type something and click Run" />
+            </div>
+            <div class="col-6">
+              <button class="btn primary" id="runBtn">Run Test</button>
+              <button class="btn" id="copyBtn" title="Copy to clipboard">Copy</button>
+              <button class="btn" id="toastBtn" title="Show toast">Toast</button>
+            </div>
+          </div>
+          <pre id="output" aria-live="polite" style="background: var(--bg); border:1px solid rgba(255,255,255,.12); padding: 12px; border-radius: 12px; overflow:auto; max-height: 200px;">
+// Output will appear here
+          </pre>
+        </div>
+      </div>
+
+      <div class="card span-4" id="stats">
+        <div class="hd"><h2>Environment</h2><span class="sub">Quick checks</span></div>
+        <div class="bd">
+          <div class="pill ok">Viewport: <strong id="vw">—</strong> × <strong id="vh">—</strong></div>
+          <div class="pill warn" style="margin-top:8px">Timezone: <strong id="tz">—</strong></div>
+          <div class="pill" style="margin-top:8px">Online: <strong id="online">—</strong></div>
+          <div class="pill" style="margin-top:8px">User Agent: <span id="ua" class="sub" style="max-width: 260px; display:inline-block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">—</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid" id="forms" aria-label="Forms" style="margin-top:16px">
+      <div class="card span-6">
+        <div class="hd"><h2>Form Test</h2><span class="sub">Validation and state</span></div>
+        <div class="bd">
+          <form id="testForm">
+            <div class="row">
+              <div class="col-6">
+                <label for="name">Name</label>
+                <input id="name" name="name" required placeholder="Jane Doe" />
+              </div>
+              <div class="col-6">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" required placeholder="jane@example.com" />
+              </div>
+              <div class="col-6">
+                <label for="role">Role</label>
+                <select id="role" name="role">
+                  <option>Developer</option>
+                  <option>Designer</option>
+                  <option>Manager</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="col-6">
+                <label for="age">Age</label>
+                <input id="age" name="age" type="number" min="0" max="120" />
+              </div>
+              <div class="col-12" style="grid-column: span 12;">
+                <label for="msg">Message</label>
+                <textarea id="msg" name="msg" rows="4" placeholder="Write something…"></textarea>
+              </div>
+            </div>
+            <div style="display:flex; gap:8px; margin-top:12px;">
+              <button class="btn primary" type="submit">Submit</button>
+              <button class="btn" type="reset">Reset</button>
+            </div>
+          </form>
+          <pre id="formOut" style="margin-top:12px; background: var(--bg); border:1px solid rgba(255,255,255,.12); padding: 12px; border-radius: 12px;">// Form output</pre>
+        </div>
+      </div>
+
+      <div class="card span-6" id="table">
+        <div class="hd"><h2>Table</h2><span class="sub">Sorting demo</span></div>
+        <div class="bd">
+          <table aria-describedby="table">
+            <thead>
+              <tr>
+                <th><button class="btn ghost" data-sort="id">ID</button></th>
+                <th><button class="btn ghost" data-sort="name">Name</button></th>
+                <th><button class="btn ghost" data-sort="qty">Qty</button></th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid" id="network" aria-label="Network" style="margin-top:16px">
+      <div class="card span-6">
+        <div class="hd"><h2>API Test</h2><span class="sub">GET request</span></div>
+        <div class="bd">
+          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">
+            <input id="apiUrl" value="https://jsonplaceholder.typicode.com/todos/1" />
+            <button class="btn" id="fetchBtn">Fetch</button>
+            <button class="btn" id="pingBtn" title="Measure latency">Ping</button>
+          </div>
+          <pre id="apiOut" style="background: var(--bg); border:1px solid rgba(255,255,255,.12); padding: 12px; border-radius: 12px; max-height: 240px; overflow:auto;">// API response</pre>
+        </div>
+      </div>
+
+      <div class="card span-6">
+        <div class="hd"><h2>Accessibility</h2><span class="sub">Quick checklist</span></div>
+        <div class="bd">
+          <ul>
+            <li>All interactive items reachable via <span class="kbd">Tab</span>.</li>
+            <li>ARIA labels on navigation and live regions.</li>
+            <li>Focus rings visible; color-contrast friendly.</li>
+          </ul>
+          <p class="sub">Try keyboard: <span class="kbd">T</span> (toggle theme), <span class="kbd">/</span> (focus search below).</p>
+          <label for="search">Site search</label>
+          <input id="search" placeholder="Type to filter table… (press /)" />
+        </div>
+      </div>
+    </section>
+
+    <p class="footer">Built for quick testing. No frameworks. Copy this single file and tweak away ✨</p>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite">Copied to clipboard ✅</div>
+
+  <script>
+    // --- Theme toggle ---
+    const toggleThemeBtn = document.getElementById('toggleTheme');
+    toggleThemeBtn.addEventListener('click', () => document.documentElement.classList.toggle('light'));
+    document.addEventListener('keydown', e => { if (e.key.toLowerCase() === 't') toggleThemeBtn.click(); if (e.key === '/') { e.preventDefault(); document.getElementById('search').focus(); } });
+
+    // --- Playground ---
+    const out = document.getElementById('output');
+    const runBtn = document.getElementById('runBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const toast = document.getElementById('toast');
+    const toastBtn = document.getElementById('toastBtn');
+
+    function log(obj){ out.textContent = typeof obj === 'string' ? obj : JSON.stringify(obj, null, 2); }
+
+    runBtn.addEventListener('click', () => {
+      const txt = document.getElementById('txt').value.trim();
+      const stats = {
+        input: txt || '(empty)',
+        length: txt.length,
+        words: txt ? txt.split(/\s+/).length : 0,
+        reversed: txt.split('').reverse().join('')
+      };
+      log(stats);
+    });
+
+    copyBtn.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(out.textContent); showToast('Copied to clipboard ✅'); } catch (e) { showToast('Copy failed ❌'); }
+    });
+
+    toastBtn.addEventListener('click', () => showToast('Hello from a toast 👋'));
+    function showToast(msg){ toast.textContent = msg; toast.classList.add('show'); setTimeout(()=> toast.classList.remove('show'), 1800); }
+
+    // --- Environment ---
+    const vw = document.getElementById('vw');
+    const vh = document.getElementById('vh');
+    const tz = document.getElementById('tz');
+    const ua = document.getElementById('ua');
+    const online = document.getElementById('online');
+    function updateEnv(){ vw.textContent = window.innerWidth; vh.textContent = window.innerHeight; tz.textContent = Intl.DateTimeFormat().resolvedOptions().timeZone; ua.textContent = navigator.userAgent; online.textContent = navigator.onLine ? 'Yes' : 'No'; }
+    updateEnv();
+    addEventListener('resize', updateEnv);
+    addEventListener('online', updateEnv);
+    addEventListener('offline', updateEnv);
+
+    // --- Form handling ---
+    const form = document.getElementById('testForm');
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      document.getElementById('formOut').textContent = JSON.stringify(data, null, 2);
+    });
+
+    // --- Table + sorting + filter ---
+    const rows = [
+      { id: 101, name: 'Alpha', qty: 14, status: 'OK' },
+      { id: 42, name: 'Beta', qty: 2, status: 'Low' },
+      { id: 7, name: 'Gamma', qty: 99, status: 'OK' },
+      { id: 88, name: 'Delta', qty: 0, status: 'Out' },
+      { id: 15, name: 'Epsilon', qty: 27, status: 'OK' }
+    ];
+    const tbody = document.getElementById('tbody');
+    function renderTable(data){
+      tbody.innerHTML = data.map(r => `
+        <tr>
+          <td>${r.id}</td>
+          <td>${r.name}</td>
+          <td>${r.qty}</td>
+          <td>
+            <span class="pill ${r.status==='OK' ? 'ok' : r.status==='Low' ? 'warn' : 'err'}">${r.status}</span>
+          </td>
+        </tr>`).join('');
+    }
+    renderTable(rows);
+
+    document.querySelectorAll('[data-sort]').forEach(btn => btn.addEventListener('click', () => {
+      const key = btn.getAttribute('data-sort');
+      const sorted = [...rows].sort((a,b)=> a[key] > b[key] ? 1 : -1);
+      renderTable(sorted);
+    }));
+
+    const search = document.getElementById('search');
+    search.addEventListener('input', () => {
+      const q = search.value.toLowerCase();
+      const filtered = rows.filter(r => Object.values(r).some(v => String(v).toLowerCase().includes(q)));
+      renderTable(filtered);
+    });
+
+    // --- Network test ---
+    const fetchBtn = document.getElementById('fetchBtn');
+    const pingBtn = document.getElementById('pingBtn');
+    const apiUrl = document.getElementById('apiUrl');
+    const apiOut = document.getElementById('apiOut');
+
+    fetchBtn.addEventListener('click', async () => {
+      apiOut.textContent = 'Fetching…';
+      try {
+        const res = await fetch(apiUrl.value, { cache: 'no-store' });
+        const text = await res.text();
+        apiOut.textContent = text;
+      } catch (e) {
+        apiOut.textContent = 'Request failed: ' + e.message;
+      }
+    });
+
+    pingBtn.addEventListener('click', async () => {
+      apiOut.textContent = 'Pinging…';
+      const start = performance.now();
+      try {
+        await fetch(apiUrl.value + (apiUrl.value.includes('?') ? '&' : '?') + 't=' + Date.now(), { method: 'HEAD', mode: 'no-cors' });
+        const ms = Math.round(performance.now() - start);
+        apiOut.textContent = `Estimated latency: ${ms} ms`;
+      } catch (e) {
+        const ms = Math.round(performance.now() - start);
+        apiOut.textContent = `Ping error after ${ms} ms: ${e.message}`;
+      }
+    });
+  </script>
+</body>
+</html>
